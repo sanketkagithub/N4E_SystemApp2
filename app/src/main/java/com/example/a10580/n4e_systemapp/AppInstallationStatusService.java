@@ -1,6 +1,7 @@
 package com.example.a10580.n4e_systemapp;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -9,6 +10,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.example.a10580.n4e_systemapp.utils.DateFormatManager;
 import com.example.a10580.n4e_systemapp.utils.SharedPreferenceManager;
 
 import java.util.LinkedList;
@@ -21,13 +23,15 @@ public class AppInstallationStatusService extends Service {
         return null;
     }
 
-    SharedPreferenceManager sharedPreferenceManager;
+   private SharedPreferenceManager sharedPreferenceManager;
+   private DateFormatManager dateFormatManager;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
 
         sharedPreferenceManager = SharedPreferenceManager.getInstance();
+        dateFormatManager = DateFormatManager.getInstance();
 
         repeatInstallationChecks();
 
@@ -66,21 +70,15 @@ public class AppInstallationStatusService extends Service {
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
-
             checkOldStatusNreportToServer();
-
             repeatInstallationChecks();
-
         }
     };
 
 
     void repeatInstallationChecks() {
-
         handler = new Handler();
-        handler.postDelayed(runnable, 4000);
-
-
+        handler.postDelayed(runnable, 10000);
     }
 
 
@@ -92,20 +90,26 @@ public class AppInstallationStatusService extends Service {
         sharedPreferenceManager.setAppInstallationStatus(this, newAppInstallationStatus);
         if (isN4EInstalledInChildDevice()) {
             appStatus = "installed";
-            Log.i("N4Eapp=>", "N4E is installed");
+
+            //   get N4E's Installation Time
+           String n4esInstallationTime = dateFormatManager.getCurrentDate(DateFormatManager.DateFormatSelector.UTC_DATE);
+
+            Log.i("N4Eapp=>", appStatus);
+            Log.i("N4EappTime=>", n4esInstallationTime);
+
         } else {
-            appStatus = "notInstalled";
-            Log.i("N4Eapp=>", "N4E is not ");
+            appStatus = "unInstalled";
+            //  get N4E's unInstallation Time
+            String n4esUnInstallationTime = dateFormatManager.getCurrentDate(DateFormatManager.DateFormatSelector.UTC_DATE);
+            Log.i("N4Eapp=>", appStatus);
+            Log.i("N4EappTime=>", n4esUnInstallationTime);
         }
 
-        Log.i("appStatus", appStatus);
         String accessToken = sharedPreferenceManager.getAccessToken(AppInstallationStatusService.this);
         String targetId = sharedPreferenceManager.getTargetId(AppInstallationStatusService.this);
 
         Log.i("accessToken", accessToken);
         Log.i("targetId", targetId);
-
-
     }
 
 
@@ -145,6 +149,17 @@ public class AppInstallationStatusService extends Service {
         }
 
 
+    }
+
+
+    // TODO: 19/4/18 alternate method to check n4e's installed app status (but every time need to handle exception(drawback))
+    public static boolean isN4Einstalled(Context context, String packageName) {
+        try {
+            context.getPackageManager().getApplicationInfo(packageName, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 
 
