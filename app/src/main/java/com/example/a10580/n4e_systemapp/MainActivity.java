@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     void triggerServiceWithFixedInterval() {
-        Intent ishintent = new Intent(this, AppInstallationStatusService.class);
-        PendingIntent pintent = PendingIntent.getService(this, 0, ishintent, 0);
+        Intent heartBeatIntent = new Intent(this, AppInstallationStatusService.class);
+        PendingIntent pintent = PendingIntent.getService(this, 0, heartBeatIntent, 0);
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarm.cancel(pintent);
          alarm.setRepeating(AlarmManager.RTC_WAKEUP, 2, 2, pintent);
