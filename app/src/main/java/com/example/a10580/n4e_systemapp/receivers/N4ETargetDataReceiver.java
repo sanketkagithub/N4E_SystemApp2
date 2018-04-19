@@ -30,7 +30,7 @@ public class N4ETargetDataReceiver extends BroadcastReceiver {
            Log.i("targetAccessToken",targetAccessToken);
            Log.i("targetId",targetId);
 
-           saveOrUpdateN4EsDataInSession(context,targetAccessToken,targetId);
+           updateN4EsDataInSession(context,targetAccessToken,targetId);
        }
 
 
@@ -38,7 +38,7 @@ public class N4ETargetDataReceiver extends BroadcastReceiver {
 
 
     // TODO: 18/4/18 insertion params may be added in future
-    void saveOrUpdateN4EsDataInSession(Context context,String...data)
+    void updateN4EsDataInSession(Context context, String...data)
     {
        String targetAccessToken = data[0];
        String targetId = data[1];
