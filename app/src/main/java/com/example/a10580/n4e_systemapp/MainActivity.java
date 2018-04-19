@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         triggerServiceWithFixedInterval();
+        finish();
     }
 
 

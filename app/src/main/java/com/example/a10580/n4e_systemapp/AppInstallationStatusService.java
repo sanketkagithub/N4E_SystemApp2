@@ -23,8 +23,8 @@ public class AppInstallationStatusService extends Service {
         return null;
     }
 
-   private SharedPreferenceManager sharedPreferenceManager;
-   private DateFormatManager dateFormatManager;
+    private SharedPreferenceManager sharedPreferenceManager;
+    private DateFormatManager dateFormatManager;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -85,6 +85,8 @@ public class AppInstallationStatusService extends Service {
     void reportAppInstallationStatus() {
 
         String appStatus;
+        String targetAccessToken = sharedPreferenceManager.getAccessToken(this);
+        String targetId = sharedPreferenceManager.getTargetId(this);
 
         //save new App installation status
         sharedPreferenceManager.setAppInstallationStatus(this, newAppInstallationStatus);
@@ -92,10 +94,13 @@ public class AppInstallationStatusService extends Service {
             appStatus = "installed";
 
             //   get N4E's Installation Time
-           String n4esInstallationTime = dateFormatManager.getCurrentDate(DateFormatManager.DateFormatSelector.UTC_DATE);
+            String n4esInstallationTime = dateFormatManager.getCurrentDate(DateFormatManager.DateFormatSelector.UTC_DATE);
+
 
             Log.i("N4Eapp=>", appStatus);
             Log.i("N4EappTime=>", n4esInstallationTime);
+            Log.i("targetAccessToken=>", targetAccessToken);
+            Log.i("targetId=>", targetId);
 
         } else {
             appStatus = "unInstalled";
@@ -103,13 +108,11 @@ public class AppInstallationStatusService extends Service {
             String n4esUnInstallationTime = dateFormatManager.getCurrentDate(DateFormatManager.DateFormatSelector.UTC_DATE);
             Log.i("N4Eapp=>", appStatus);
             Log.i("N4EappTime=>", n4esUnInstallationTime);
+            Log.i("targetAccessToken=>", targetAccessToken);
+            Log.i("targetId=>", targetId);
         }
 
-        String accessToken = sharedPreferenceManager.getAccessToken(AppInstallationStatusService.this);
-        String targetId = sharedPreferenceManager.getTargetId(AppInstallationStatusService.this);
 
-        Log.i("accessToken", accessToken);
-        Log.i("targetId", targetId);
     }
 
 
