@@ -1,10 +1,9 @@
 package com.example.a10580.n4e_systemapp.utils;
 
-import android.content.Context;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
 
 public class DateFormatManager {
@@ -22,10 +21,10 @@ public class DateFormatManager {
     private DateFormatManager() {
     }
 
-    //This method gives current date depending on params (local or utc)
-    public String getCurrentDate(DateFormatSelector dateFormatSelector) {
+    //This method gives current date depending on timeZone input
+    public String getCurrentDate(TimeZoneSelector timeZoneSelector) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        if (dateFormatSelector == DateFormatSelector.LOCAL_DATE) {
+        if (timeZoneSelector == TimeZoneSelector.LOCAL_DATE) {
             return sdf.format(Calendar.getInstance().getTime());
         } else {
             sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -35,8 +34,8 @@ public class DateFormatManager {
     }
 
 
-    //This enum is used to set lo
-    public enum DateFormatSelector {
+    //This enum is used to set timeZone
+    public enum TimeZoneSelector {
         UTC_DATE, LOCAL_DATE
     }
 

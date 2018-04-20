@@ -53,7 +53,7 @@ public class ReportAppInstallationStatusIntentService extends IntentService {
             appStatus = "installed";
 
             //   get N4E's Installation Time
-            String n4esInstallationTime = mDateFormatManager.getCurrentDate(DateFormatManager.DateFormatSelector.UTC_DATE);
+            String n4esInstallationTime = mDateFormatManager.getCurrentDate(DateFormatManager.TimeZoneSelector.UTC_DATE);
 
             Log.i("N4Eapp=>", appStatus);
             Log.i("N4EappTime=>", n4esInstallationTime);
@@ -62,7 +62,7 @@ public class ReportAppInstallationStatusIntentService extends IntentService {
             appStatus = "unInstalled";
 
             //  get N4E's unInstallation Time
-            String n4esUnInstallationTime = mDateFormatManager.getCurrentDate(DateFormatManager.DateFormatSelector.UTC_DATE);
+            String n4esUnInstallationTime = mDateFormatManager.getCurrentDate(DateFormatManager.TimeZoneSelector.UTC_DATE);
             Log.i("N4Eapp=>", appStatus);
             Log.i("N4EappTime=>", n4esUnInstallationTime);
         }

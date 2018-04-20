@@ -3,11 +3,12 @@ package com.example.a10580.n4e_systemapp.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+//This class is used to save N4E Target's data in session
 public class SharedPreferenceManager {
-    private static SharedPreferenceManager ourInstance = null;
+    private static SharedPreferenceManager ourInstance;
     private static final String APP_SETTINGS = "APP_SETTINGS";
-    private SharedPreferences.Editor editor;
 
+    //This method gives SharedPreferenceManager class's object(created only once for the first time)
     public static SharedPreferenceManager getInstance() {
         if (ourInstance == null) {
             ourInstance = new SharedPreferenceManager();
@@ -15,18 +16,17 @@ public class SharedPreferenceManager {
         return ourInstance;
     }
 
+    //This constructor prevents further multiple objects creation of SharedPreferenceManager class
     private SharedPreferenceManager() {
     }
 
-
+   //This method gives main file of sharedPreference
     private SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE);
     }
 
     public void setTargetId(Context context, String targetId) {
-        editor = getSharedPreferences(context).edit();
-        editor.putString("targetId", targetId);
-        editor.apply();
+        getSharedPreferences(context).edit().putString("targetId", targetId).apply();
     }
 
     public String getTargetId(Context context) {
@@ -34,9 +34,7 @@ public class SharedPreferenceManager {
     }
 
     public void setAccessToken(Context context, String accessToken) {
-        editor = getSharedPreferences(context).edit();
-        editor.putString("accessToken", accessToken);
-        editor.apply();
+        getSharedPreferences(context).edit().putString("accessToken", accessToken).apply();
     }
 
     public String getAccessToken(Context context) {
@@ -45,9 +43,7 @@ public class SharedPreferenceManager {
 
 
     public void setAppInstallationStatus(Context context, boolean isAppInstalled) {
-        editor = getSharedPreferences(context).edit();
-        editor.putBoolean("isAppInstalled", isAppInstalled);
-        editor.apply();
+        getSharedPreferences(context).edit().putBoolean("isAppInstalled", isAppInstalled).apply();
     }
 
     public boolean getAppInstallationStatus(Context context) {

@@ -5,7 +5,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -18,24 +17,32 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        confirmSystemAppInstallaionInTarget();
-        restartReportingInstallationStatus();
+        confirmSystemAppInstallationInTarget();
+        keepReportingInstallationStatus();
+        finish();
     }
 
-//This method checks old and new N4E's installation status, if changes found,
+    //This method checks old and new N4E's installation status, if changes found,
 // reports to server using intent service.
-    void restartReportingInstallationStatus() {
-        Intent isIntent = new Intent(this, ReportAppInstallationStatusIntentService.class);
-        PendingIntent pintent = PendingIntent.getService(this, 0, isIntent, 0);
+    void keepReportingInstallationStatus() {
+        long triggerAtMillis = 2;
+        long intervalMillis = 2;
+
+        Intent reportAppInstallationIntentServiceIntent = new Intent(this, ReportAppInstallationStatusIntentService.class);
+        PendingIntent reportingStatusPendingIntent = PendingIntent.getService(this, 0, reportAppInstallationIntentServiceIntent, 0);
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarm.cancel(pintent);
-        alarm.setRepeating(AlarmManager.RTC_WAKEUP, 2, 2, pintent);
+        assert alarm != null;
+        alarm.cancel(reportingStatusPendingIntent);
+        alarm.setRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, intervalMillis, reportingStatusPendingIntent);
         //alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, 2, 2, pintent);
     }
 
 
-    /**This method reports system app's installation to server, after getting installed successfully **/
-    void confirmSystemAppInstallaionInTarget() {
+    /**
+     * This method reports this (SystemApp) app's installation to server,
+     * after getting installed successfully
+     **/
+    void confirmSystemAppInstallationInTarget() {
         Log.i("appInstalled", "done");
     }
 
