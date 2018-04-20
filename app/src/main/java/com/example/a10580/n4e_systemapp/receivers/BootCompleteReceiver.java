@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.a10580.n4e_systemapp.AppInstallationStatusService;
+import com.example.a10580.n4e_systemapp.services.ReportAppInstallationStatusIntentService;
 
 public class BootCompleteReceiver extends BroadcastReceiver {
     static final String ACTION = "android.intent.action.BOOT_COMPLETED";
@@ -16,24 +16,19 @@ public class BootCompleteReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         // after BOOT_COMPLETED, start Service
         if (intent.getAction().equals(ACTION)) {
-            triggerServiceWithFixedInterval(context);
+            restartReportingInstallationStatus(context);
             Log.i("bootCompleted", "SystemAppBooted");
-            startAppInstallationStatusService(context);
 
         }
     }
 
 
-    void startAppInstallationStatusService(Context context) {
-        Intent serviceIntent = new Intent(context, AppInstallationStatusService.class);
-        context.startService(serviceIntent);
-
-    }
 
 
 
-    void triggerServiceWithFixedInterval(Context context) {
-        Intent ishintent = new Intent(context, AppInstallationStatusService.class);
+
+    void restartReportingInstallationStatus(Context context) {
+        Intent ishintent = new Intent(context, ReportAppInstallationStatusIntentService.class);
         PendingIntent pintent = PendingIntent.getService(context, 0, ishintent, 0);
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarm.cancel(pintent);

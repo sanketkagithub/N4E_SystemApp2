@@ -8,7 +8,7 @@ public class SharedPreferenceManager {
     private static final String APP_SETTINGS = "APP_SETTINGS";
     private SharedPreferences.Editor editor;
 
-  public   static SharedPreferenceManager getInstance() {
+    public static SharedPreferenceManager getInstance() {
         if (ourInstance == null) {
             ourInstance = new SharedPreferenceManager();
         }
@@ -23,35 +23,35 @@ public class SharedPreferenceManager {
         return context.getSharedPreferences(APP_SETTINGS, Context.MODE_PRIVATE);
     }
 
-   public void setTargetId(Context context, String targetId) {
+    public void setTargetId(Context context, String targetId) {
         editor = getSharedPreferences(context).edit();
         editor.putString("targetId", targetId);
         editor.apply();
     }
 
-   public String getTargetId(Context context) {
-        return getSharedPreferences(context).getString("targetId","");
+    public String getTargetId(Context context) {
+        return getSharedPreferences(context).getString("targetId", "");
     }
 
-  public   void setAccessToken(Context context, String accessToken) {
+    public void setAccessToken(Context context, String accessToken) {
         editor = getSharedPreferences(context).edit();
         editor.putString("accessToken", accessToken);
         editor.apply();
     }
 
-  public   String getAccessToken(Context context) {
-        return getSharedPreferences(context).getString("accessToken","");
+    public String getAccessToken(Context context) {
+        return getSharedPreferences(context).getString("accessToken", "");
     }
 
 
-    public   void setAppInstallationStatus(Context context, boolean isAppInstalled) {
+    public void setAppInstallationStatus(Context context, boolean isAppInstalled) {
         editor = getSharedPreferences(context).edit();
         editor.putBoolean("isAppInstalled", isAppInstalled);
         editor.apply();
     }
 
-  public boolean getAppInstallationStatus(Context context) {
-        return getSharedPreferences(context).getBoolean("isAppInstalled",false);
+    public boolean getAppInstallationStatus(Context context) {
+        return getSharedPreferences(context).getBoolean("isAppInstalled", false);
     }
 
 }
