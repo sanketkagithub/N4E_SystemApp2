@@ -19,18 +19,14 @@ public class BootCompleteReceiver extends BroadcastReceiver {
         // after starting of device, start Service
         if (intent.getAction().equals(ACTION)) {
             keepReportingInstallationStatus(context);
-            Log.i("bootCompleted", "SystemAppBooted");
+            Log.i("bootCompleted", "SA'sBootCompletedRxInvoked");
 
         }
     }
 
 
-
-
-
-
     //This method checks old and new N4E's installation status, if changes found,
-// reports to server using intent service.
+    // reports to server using intent service.
 
     void keepReportingInstallationStatus(Context context) {
         Intent ishintent = new Intent(context, ReportAppInstallationStatusIntentService.class);
