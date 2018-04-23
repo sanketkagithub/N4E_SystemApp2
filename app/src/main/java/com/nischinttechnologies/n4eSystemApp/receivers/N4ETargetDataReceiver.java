@@ -1,4 +1,4 @@
-package com.example.a10580.n4e_systemapp.receivers;
+package com.nischinttechnologies.n4eSystemApp.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

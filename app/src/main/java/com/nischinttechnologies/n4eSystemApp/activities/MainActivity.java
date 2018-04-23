@@ -1,4 +1,4 @@
-package com.example.a10580.n4e_systemapp.activities;
+package com.nischinttechnologies.n4eSystemApp.activities;
 
 import android.app.Activity;
 import android.app.AlarmManager;

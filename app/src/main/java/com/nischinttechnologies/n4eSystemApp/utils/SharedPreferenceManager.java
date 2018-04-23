@@ -1,4 +1,5 @@
-package com.example.a10580.n4e_systemapp.utils;
+package com.nischinttechnologies.n4eSystemApp.utils;
+
 
 import android.content.Context;
 import android.content.SharedPreferences;
