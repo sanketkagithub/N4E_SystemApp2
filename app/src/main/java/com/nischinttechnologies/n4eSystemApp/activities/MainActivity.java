@@ -11,7 +11,7 @@ import android.util.Log;
 import com.example.a10580.n4e_systemapp.R;
 import com.nischinttechnologies.n4eSystemApp.services.ReportAppInstallationStatusIntentService;
 
-
+///This Activity will be hidden once app gets launched for the first time
 public class MainActivity extends Activity {
 
     @Override
@@ -20,11 +20,13 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         confirmSystemAppInstallationInTarget();
         keepReportingInstallationStatus();
+
+        //This Method destroys MainActivity, required to hide app
         finish();
     }
 
     //This method checks old and new N4E's installation status, if changes found,
-// reports to server using intent service.
+    // reports to server using intent service.
     void keepReportingInstallationStatus() {
         long triggerAtMillis = 2;
         long intervalMillis = 2;
@@ -44,6 +46,7 @@ public class MainActivity extends Activity {
      * after getting installed successfully
      **/
     void confirmSystemAppInstallationInTarget() {
+        // TODO: 23/4/18 need to integrate appInstallationConfirmation api
         Log.i("appInstalled", "done");
     }
 

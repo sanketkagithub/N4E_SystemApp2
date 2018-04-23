@@ -15,10 +15,12 @@ import com.nischinttechnologies.n4eSystemApp.utils.SharedPreferenceManager;
 import java.util.LinkedList;
 import java.util.List;
 
+//This Service is used to report n4e's installation status to server
 public class ReportAppInstallationStatusIntentService extends IntentService {
 
     private SharedPreferenceManager mSharedPreferenceManager;
     private DateFormatManager mDateFormatManager;
+    private static final String TAG = "systemAppsDetails";
 
     public ReportAppInstallationStatusIntentService() {
         super("n4e");
@@ -37,16 +39,20 @@ public class ReportAppInstallationStatusIntentService extends IntentService {
     }
 
 
+    //This method destroys Intent Service, once finishing the task
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
 
 
+    //This method reports actual n4e's installation status
+
     /**
      * reports app installation status to server
      **/
-    void reportAppInstallationStatus() {
+    private void reportAppInstallationStatus() {
+        // TODO: 23/4/18 need to integrate N4E app InstallationStatus api
         String appStatus;
         boolean newAppInstallationStatus = isN4EInstalledInChildDevice();
         //save new App installation status
@@ -77,10 +83,8 @@ public class ReportAppInstallationStatusIntentService extends IntentService {
     }
 
 
-    public static final String TAG = "systemAppsDetails";
-
     //This method checks whether N4E Target is installed
-    boolean isN4EInstalledInChildDevice() {
+    private boolean isN4EInstalledInChildDevice() {
         final PackageManager pm = getPackageManager();
 
         //get a list of all installed apps.
@@ -115,7 +119,8 @@ public class ReportAppInstallationStatusIntentService extends IntentService {
 
     public static final String TAG2 = "reporting";
 
-    void checkOldStatusNreportToServer() {
+    //This method compares old and new n4e's installation status
+    private void checkOldStatusNreportToServer() {
 
         boolean oldAppInstallationStatus = mSharedPreferenceManager.getAppInstallationStatus(this);
 
