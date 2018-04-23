@@ -8,8 +8,9 @@ import android.content.pm.PackageManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.a10580.n4e_systemapp.utils.DateFormatManager;
-import com.example.a10580.n4e_systemapp.utils.SharedPreferenceManager;
+
+import com.nischinttechnologies.n4eSystemApp.utils.DateFormatManager;
+import com.nischinttechnologies.n4eSystemApp.utils.SharedPreferenceManager;
 
 import java.util.LinkedList;
 import java.util.List;

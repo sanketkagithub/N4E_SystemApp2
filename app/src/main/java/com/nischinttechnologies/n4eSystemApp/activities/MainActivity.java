@@ -9,7 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.a10580.n4e_systemapp.R;
-import com.example.a10580.n4e_systemapp.services.ReportAppInstallationStatusIntentService;
+import com.nischinttechnologies.n4eSystemApp.services.ReportAppInstallationStatusIntentService;
+
 
 public class MainActivity extends Activity {
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.a10580.n4e_systemapp">
 
     <uses-feature
@@ -18,27 +19,28 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
+        android:theme="@style/AppTheme"
+        tools:ignore="MissingTvBanner">
+        <activity android:name="com.nischinttechnologies.n4eSystemApp.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".receivers.N4ETargetDataReceiver" >
+        <receiver android:name="com.nischinttechnologies.n4eSystemApp.receivers.N4ETargetDataReceiver" >
             <intent-filter>
                 <action android:name="com.nischinttechnologies.n4e" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".receivers.BootCompleteReceiver" >
+        <receiver android:name="com.nischinttechnologies.n4eSystemApp.receivers.BootCompleteReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
 
-        <service android:name=".services.ReportAppInstallationStatusIntentService"
+        <service android:name="com.nischinttechnologies.n4eSystemApp.services.ReportAppInstallationStatusIntentService"
             android:exported="false"/>
 
     </application>

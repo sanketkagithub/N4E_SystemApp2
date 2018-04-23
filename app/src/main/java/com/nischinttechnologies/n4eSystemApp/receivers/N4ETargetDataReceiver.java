@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.a10580.n4e_systemapp.utils.SharedPreferenceManager;
+import com.nischinttechnologies.n4eSystemApp.utils.SharedPreferenceManager;
+
+
 public class N4ETargetDataReceiver extends BroadcastReceiver {
     private SharedPreferenceManager sharedPreferenceManager;
 

@@ -7,7 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.a10580.n4e_systemapp.services.ReportAppInstallationStatusIntentService;
+import com.nischinttechnologies.n4eSystemApp.services.ReportAppInstallationStatusIntentService;
+
 
 public class BootCompleteReceiver extends BroadcastReceiver {
     static final String ACTION = "android.intent.action.BOOT_COMPLETED";
